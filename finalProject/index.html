@@ -18,73 +18,87 @@
 
   <!--  Google Fonts  -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
 </head>
 
+<!--  TEMP NAVIGATION  -->
+<header>
+  <a href="" class="div-screen" data-screen="div1">Homepage</a>
+  <a href="" class="div-screen" data-screen="div2">Article Search</a>
+  <a href="" class="div-screen" data-screen="div3">Favorite Places</a>
+  <a href="" class="div-screen" data-screen="div4">Movies to Watch</a>
+</header>
+
+<!--  Top App Bar  -->
+<header class="mdc-top-app-bar">
+  <div class="mdc-top-app-bar__row">
+    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+      <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"
+        aria-label="Open navigation menu">menu</button>
+      <span class="mdc-top-app-bar__title">CHICAGO</span>
+    </section>
+    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+      <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Search">search</button>
+    </section>
+  </div>
+</header>
+
+
+
 <body>
-  <!--   Top App Bar -->
-  <header class="mdc-top-app-bar mdc-top-app-bar--fixed">
-    <div class="mdc-top-app-bar__row">
-      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-        <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"
-          aria-label="Open navigation menu">menu</button>
-        <span class="mdc-top-app-bar__title">All About Chicago</span>
-      </section>
-  </header>
+  <!--  Screen 1: Homepage  -->
+  <main id="div1" class="mdc-top-app-bar--fixed-adjust screen" style="display:block;">
+    <img id="home-photo" src="images/theBean.jpg">
+    <p id="home-title">CHICAGO</p>
+  </main>
 
-  <!--  Navigation  -->
-  <aside class="mdc-drawer mdc-drawer--modal">
-    <div class="mdc-drawer__content">
-      <nav class="mdc-list">
-        <a href="" data-screen="div1" class="mdc-list-item mdc-list-item--activated" aria-current="page" tabindex="0">
-          <span class="mdc-list-item__ripple"></span>
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>
-          <span class="mdc-list-item__text">Home</span>
-        </a>
-        
-        <a href="" data-screen="div2" class="mdc-list-item">
-          <span class="mdc-list-item__ripple"></span>
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>
-          <span class="mdc-list-item__text">Screen 2</span>
-        </a>
+  <!--  Screen 2: Articles Related to Chicago  -->
+  <main id="div2" class="mdc-top-app-bar--fixed-adjust screen" style="display:none;">
+    <center>
+      <h1>Latest News Related to Chicago</h1>
+    </center>
+    <div class="article-container"></div>
+  </main>
 
-        <a href="" data-screen="div3" class="mdc-list-item">
-          <span class="mdc-list-item__ripple"></span>
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>
-          <span class="mdc-list-item__text">Screen 3</span>
-        </a>
+  <!--  Screen 3: Places to Visit in Chicago  -->
+  <main id="div3" class="mdc-top-app-bar--fixed-adjust screen" style="display:none;">
+    Help
+  </main>
 
-        <a href="" data-screen="div4" class="mdc-list-item">
-          <span class="mdc-list-item__ripple"></span>
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>
-          <span class="mdc-list-item__text">Screen 4</span>
-        </a>
-
-      </nav>
+  <!--  Screen 4: Movies to Watch in Chicago  -->
+  <main id="div4" class="mdc-top-app-bar--fixed-adjust screen" style="display:none;">
+    <div id="map">
+      <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCkqAP80kb0ma2EkzRND0LnwixmQbqFtA&callback=initMap">
+        </script>
     </div>
-  </aside>
 
-  <div class="mdc-drawer-scrim"></div>
+    <script>
+      let map;
 
+      function initMap() {
+        const chicagoLocation = {lat: 41.8781, lng: -87.623177};
 
+        // When you open the map, it show the Chicago area
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: chicagoLocation,
+          zoom: 10,
+        });
 
-  <div id="div1" class="screen mdc-top-app-bar--fixed-adjust" style="display:block;">
-    App content
-  </div>
+        // Add a marker on the map (specfically, Chicago) with the longitude and latitude
+        const marker = new google.maps.Marker({
+          position: chicagoLocation,
+          map: map,
+        });
+      }
 
-  <div id="div2" class="screen mdc-top-app-bar--fixed-adjust" style="display:none;">
-    App content22
-  </div>
+      // Executes the initMap function, in order to display the map
+      window.initMap = initMap;
+    </script>
+  </main>
 
-  <div id="div3" class="screen mdc-top-app-bar--fixed-adjust" style="display:none;">
-    App content33
-  </div>
-
-  <div id="div4" class="screen mdc-top-app-bar--fixed-adjust" style="display:none;">
-    App content44
-  </div>
 
   <script src="finalProject_script.js"></script>
+  <script src="chicagoArticles.js"></script>
 </body>
 
 </html>
