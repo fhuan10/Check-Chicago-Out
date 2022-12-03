@@ -23,6 +23,7 @@ h1 {
   font-family: "Courier New", "Garamond","Monaco", monospace;
 }
 
+
 /* Set the size of the div element that contains the map */
 #map {
   height: 400px;
@@ -43,4 +44,8 @@ h1 {
 .my-card {
   height: 350px;
   width: 350px;
+}
+
+#searchbar {
+  width: 95%;
 }

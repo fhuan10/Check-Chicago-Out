@@ -49,6 +49,24 @@
   <main id="div1" class="mdc-top-app-bar--fixed-adjust screen" style="display:block;">
     <img id="home-photo" src="images/theBean.jpg">
     <p id="home-title">CHICAGO</p>
+
+    <center>
+      <br>
+      <button class="mdc-button mdc-button--raised article-button">
+        <span class="mdc-button__label">Articles to Read</span>
+      </button>
+
+      <button class="mdc-button mdc-button--raised place-button">
+        <span class="mdc-button__label">Places to Visit</span>
+      </button>
+
+      <button class="mdc-button mdc-button--raised movie-button">
+        <span class="mdc-button__label">Movies To Watch</span>
+      </button>
+    </center>
+    <br>
+    <br>
+
   </main>
 
   <!--  Screen 2: Articles Related to Chicago  -->
@@ -66,6 +84,10 @@
 
   <!--  Screen 4: Movies to Watch in Chicago  -->
   <main id="div4" class="mdc-top-app-bar--fixed-adjust screen" style="display:none;">
+    <center>
+      <h1>Movies Playing in Chicago</h1>
+    </center>
+
     <div id="map">
       <script async
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCkqAP80kb0ma2EkzRND0LnwixmQbqFtA&callback=initMap">
@@ -94,9 +116,54 @@
       // Executes the initMap function, in order to display the map
       window.initMap = initMap;
     </script>
+
+    <center>
+      <h2>Filter</h2>
+    </center>
+
+    <div class="mdc-card mdc-card--outlined">
+      <!--   Filter Movies   -->
+      Day of the Week
+      <div class="mdc-form-field movie-day">
+          <!--    Checkbox options      -->
+      </div>
+    </div>
+
+    <div class="mdc-card mdc-card--outlined">
+      <!--   TODO: Movie Rating   -->
+      Movie Rating
+      <div class="mdc-form-field movie-rating">
+          <!--    Checkbox option      -->
+      </div>
+    </div>
+
+    <div class="mdc-card mdc-card--outlined">
+      Choose a location (optional)
+      <div class="movie-location">
+        <!--   Filter for movie locations     -->
+        <center>
+          <input id="searchbar" onkeyup="searchNoteTitles()" type="text" class="search"
+        placeholder="Search for a location...">
+        </center>
+      </div>
+      <br>
+    </div>
+
+    <center>
+      <button class="mdc-button mdc-button--raised submit-button">
+        <span class="mdc-button__label">Submit</span>
+      </button>
+    </center>
+
+    <br>
+    <!--  TODO: Display the results in a datatable    -->
+    <div class="movie-container-filter-results"></div>
+
+    <!--  API call: https://data.cityofchicago.org/Events/Chicago-Park-District-Movies-in-the-Parks-2019/7piw-z6r6   -->
   </main>
 
 
+  <script src="displayFilter.js"></script>
   <script src="finalProject_script.js"></script>
   <script src="chicagoArticles.js"></script>
 </body>
