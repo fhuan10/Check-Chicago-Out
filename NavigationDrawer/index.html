@@ -31,21 +31,21 @@
       </section>
     </div>
   </header>
-  
+
   <aside class="mdc-drawer mdc-drawer--dismissible mdc-top-app-bar--fixed-adjust">
     <div class="mdc-drawer__content">
       <div class="mdc-list">
-        
+
         <a class="mdc-list-item mdc-list-item--activated" href="" data-screen="div1" aria-current="page">
           <span class="mdc-list-item__ripple"></span>
           <span class="mdc-list-item__text" data-screen="div1">Inbox</span>
         </a>
-        
+
         <a class="mdc-list-item" href="" data-screen="div2">
           <span class="mdc-list-item__ripple"></span>
           <span class="mdc-list-item__text" data-screen="div2">Outgoing</span>
         </a>
-        
+
         <a class="mdc-list-item" href="" data-screen="div3">
           <span class="mdc-list-item__ripple"></span>
           <span class="mdc-list-item__text" data-screen="div3">Drafts</span>
@@ -54,12 +54,33 @@
     </div>
   </aside>
 
-<!--  Screens  -->
+  <!--  Screens  -->
   <div class="mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
     <main id="div1" class="screen main-content" style="display:none;">
       App Content
+
+      <!--    Testing Checkbox    -->
+      <p>Select your favorite language</p>
+      <label for="s1"> <input type="checkbox" name="language" value="Python" id="s1">Python</label>
+      <label for="s2"><input type="checkbox" name="language" value="Java" id="s2">Java</label>
+      <label for="s3"><input type="checkbox" name="language" value="JavaScript" id="s3">JavaScript</label>
+      <p>
+        <button id="button">Get Selected subject</button>
+      </p>
+
+      <script>
+        const button= document.querySelector('#button');
+        button.addEventListener('click', (event) => {
+            let checkboxes= document.querySelectorAll('input[name="language"]:checked');
+            let output= [];
+            checkboxes.forEach((checkbox) => {
+                output.push(checkbox.value);
+            });
+            document.write("You have selected ", output);
+        });    
+      </script>
     </main>
-    
+
     <main id="div2" class="screen main-content" style="display:display;">
       App Content22
     </main>
