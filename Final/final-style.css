@@ -73,6 +73,25 @@ body {
   width: 350px;
 }
 
+/*  */
+
+#div3 {
+  background-image:url(images/chicagoView.jpeg);
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: 100% 75%
+  
+}
+/* .post-bg {
+  opacity: 50%;
+  height: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+} */
+
 /* Screen 4: Movies Playing */
 
 /* Set the size of the div element that contains the map */
