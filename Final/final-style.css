@@ -1,0 +1,94 @@
+body {
+  display: flex;
+  height: 100vh;
+}
+
+.mdc-drawer-app-content {
+  flex: auto;
+  overflow: auto;
+  position: relative;
+}
+
+.main-content {
+  overflow: auto;
+  height: 100%;
+}
+
+.app-bar {
+  position: absolute;
+}
+
+.mdc-top-app-bar {
+  z-index: 7;
+}
+
+.mdc-list-item__text {
+  font-family:'Courier New', Courier, monospace;
+}
+
+/* Screen 1: Homepage */
+#div1 {
+  position: relative;
+  text-align: center;
+}
+.home-bg {
+  opacity: 50%;
+  max-width:100%;
+  height:auto;
+  background-size:100% auto;
+}
+
+.home-title {
+  font-size:10vw;
+  font-family: "Garamond","Monaco", monospace;
+  position:absolute;
+  top:0.5em;
+  left:0;
+  width:100%;
+  padding-top:13.5%;  
+  text-align:center;
+}
+
+.home-text {
+  font-size:2vw;
+  font-family: "Garamond","Monaco", monospace;
+  position:absolute;
+  top:22em;
+  left:0;
+  width:100%;
+  background-color: #B3DDF2
+}
+
+/* Screen 2: Article Search */
+.my-card-content {
+  padding: 20px;
+}
+
+.mdc-card__content {
+  padding-left: 10px;
+}
+
+.my-card {
+  height: 350px;
+  width: 350px;
+}
+
+/* Screen 4: Movies Playing */
+
+/* Set the size of the div element that contains the map */
+#map {
+  height: 400px;
+  /* The height is 400 pixels */
+  width: 100%;
+  /* The width is the width of the web page */
+}
+
+.search {
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: groove;
+  width: 100%;
+  padding-left: 10px;
+  font-size:2em;
+}

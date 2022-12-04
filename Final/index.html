@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    Navigation Drawer
+  </title>
+
+  <link href="final-style.css" rel="stylesheet" type="text/css" />
+
+  <!-- Material Design 2 -->
+  <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js">
+  </script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- Bootstraps -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+  <!--  Top App Bar  -->
+  <header class="mdc-top-app-bar app-bar" id="app-bar">
+    <div class="mdc-top-app-bar__row">
+      <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+        <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
+        <span class="mdc-top-app-bar__title">Chicago</span>
+      </section>
+    </div>
+  </header>
+
+  <!--  Navigation Drawer  -->
+  <aside class="mdc-drawer mdc-drawer--dismissible mdc-top-app-bar--fixed-adjust">
+    <div class="mdc-drawer__content">
+      <div class="mdc-list">
+        
+        <a class="mdc-list-item mdc-list-item--activated" href="" data-screen="div1" aria-current="page">
+          <span class="mdc-list-item__ripple"></span>
+          <span class="mdc-list-item__text" data-screen="div1">Home</span>
+        </a>
+        
+        <a class="mdc-list-item" href="" data-screen="div2">
+          <span class="mdc-list-item__ripple"></span>
+          <span class="mdc-list-item__text" data-screen="div2">Articles</span>
+        </a>
+        
+        <a class="mdc-list-item" href="" data-screen="div3">
+          <span class="mdc-list-item__ripple"></span>
+          <span class="mdc-list-item__text" data-screen="div3">Places To Visit</span>
+        </a>
+
+        <a class="mdc-list-item" href="" data-screen="div3">
+          <span class="mdc-list-item__ripple"></span>
+          <span class="mdc-list-item__text" data-screen="div4">Movies Playing</span>
+        </a>
+
+        <a class="mdc-list-item" href="" data-screen="div3">
+          <span class="mdc-list-item__ripple"></span>
+          <span class="mdc-list-item__text" data-screen="div5">How Far</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+<!--  Screens  -->
+  <div class="mdc-drawer-app-content mdc-top-app-bar--fixed-adjust">
+  <!--   Homepage   -->
+    <main id="div1" class="screen main-content" style="display:none;">
+      <img class="home-bg" src="images/theBean.jpg">
+      <h1 class="home-title">CHICAGO</h1>
+
+      <p class="home-text">Click on the top left icon to view other pages</p>
+      
+    </main>
+  
+    <!--   Article Search   -->
+    <main id="div2" class="screen main-content" style="display:none;">
+      <center>
+      <h1>Latest News Related to Chicago</h1>
+    </center>
+    <div class="article-container"></div>
+    </main>
+
+    <!--   Favorite Places to Visit   -->
+    <main id="div3" class="screen main-content" style="display:none;">
+      App Content2244444
+    </main>
+
+    <!--   Movies Playing   -->
+    <main id="div4" class="screen main-content" style="display:none;">
+      <center>
+      <h1>Movies Playing in Chicago</h1>
+    </center>
+
+    <div id="map">
+      <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCkqAP80kb0ma2EkzRND0LnwixmQbqFtA&callback=initMap">
+        </script>
+    </div>
+
+    <center>
+      <h2>Filter</h2>
+    </center>
+
+    <div class="mdc-card mdc-card--outlined">
+      <!--   Filter Movies   -->
+      Day of the Week
+      <div class="mdc-form-field movie-day">
+          <!--    Checkbox options      -->
+      </div>
+    </div>
+
+    <div class="mdc-card mdc-card--outlined">
+      <!--   TODO: Movie Rating   -->
+      Movie Rating
+      <div class="mdc-form-field movie-rating">
+          <!--    Checkbox option      -->
+      </div>
+    </div>
+
+    <div class="mdc-card mdc-card--outlined">
+      Choose a location (optional)
+      <div class="movie-location">
+        <!--   Filter for movie locations     -->
+        <center>
+          <input id="searchbar" onkeyup="searchNoteTitles()" type="text" class="search"
+        placeholder="Search for a location...">
+        </center>
+      </div>
+      <br>
+    </div>
+
+    <center>
+      <button class="mdc-button mdc-button--raised submit-button">
+        <span class="mdc-button__label">Submit</span>
+      </button>
+    </center>
+
+    <br>
+    <!--  TODO: Display the results   -->
+    <div class="movie-container-filter-results"></div>
+
+    <!--  API call: https://data.cityofchicago.org/Events/Chicago-Park-District-Movies-in-the-Parks-2019/7piw-z6r6   -->
+
+    <!-- Display the map with the markers, even with filters   -->
+      <script>
+      let map;
+
+      function initMap() {
+        const chicagoLocation = {lat: 41.8781, lng: -87.623177};
+
+        // When you open the map, it show the Chicago area
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: chicagoLocation,
+          zoom: 10,
+        });
+
+        // Add markers to show where the movies are taking place at
+        var moviePlaceURL = "https://data.cityofchicago.org/resource/7piw-z6r6.json"
+
+        fetch(moviePlaceURL)
+        .then((response) => {return response.json()})
+        .then((data) => {
+          console.log(data);
+
+          data.forEach((record) => {
+            // Get the location's latitude and longitude
+            if (record.park != "Chicago History Museum") {
+              let locationLat = record.location.latitude;
+              console.log(record.location)
+              let locationLong = record.location.longitude;
+  
+              var newLatLong = new google.maps.LatLng(locationLat, locationLong);
+              
+              // Create a marker for the location
+              var marker = new google.maps.Marker({
+                position: newLatLong,
+                map,
+              });
+  
+              // Tells information about the location
+              let locationContentString = "<h5>" + record.title + "</h5><b><u>Movie Rating:</u></b> " + record.rating + "<br><br><b><u>When:</u></b> " + record.date.substring(0, 10) + "<br><br><b><u>Place:</u></b> " + record.park + "<br><b><u>Address:</u></b> " + record.park_address + "<br><b><u>Phone Number:</u></b> " + record.park_phone;
+  
+              // Create the info window, setting the content to the locationContentString
+              var infowindow = new google.maps.InfoWindow({
+                content: locationContentString,
+              });
+    
+              // User clicks on the marker to view content
+              marker.addListener("click", (event) => {
+                infowindow.open({
+                  anchor: marker,
+                  map,
+                  shouldFocus: false,
+                });
+              })
+            }
+
+          })
+          
+        })
+      }
+
+      // Executes the initMap function, in order to display the map
+      window.initMap = initMap;
+    </script>
+    </main>
+
+    <!--   How Far Are You From Chicago?   -->
+    <main id="div5" class="screen main-content" style="display:none;">
+      How far?
+    </main>
+  </div>
+
+  <script src="final.js"></script>
+  <script src="chicagoArticles.js"></script>
+  <script src="displayFilter.js"></script>
+</body>
+
+</html>
