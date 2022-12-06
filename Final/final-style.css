@@ -138,11 +138,14 @@ body {
 
 .user-name {
   padding-left:10px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
 }
 
 .user-body {
   padding-left:30px;
   font-size: 2em;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .back-button {

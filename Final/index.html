@@ -126,7 +126,7 @@
         <center>
           <button class="mdc-button mdc-button--unelevated create-note-button">
             <span class="mdc-button__ripple"></span>
-            <span class="mdc-button__label">Create a Review</span>
+            <span class="mdc-button__label" style="">Create a Review</span>
           </button>
         </center>
 
@@ -301,6 +301,8 @@
 
                     // Tells information about the location
                     let locationContentString = "<h5>" + record.title + "</h5><b><u>Movie Rating:</u></b> " + record.rating + "<br><br><b><u>When:</u></b> " + record.date.substring(0, 10) + "<br><br><b><u>Place:</u></b> " + record.park + "<br><b><u>Address:</u></b> " + record.park_address + "<br><b><u>Phone Number:</u></b> " + record.park_phone;
+                    // //TEST HERE
+                    // document.querySelector(".movie-container-filter-results").append(locationContentString);
 
                     // Create the info window, setting the content to the locationContentString
                     var infowindow = new google.maps.InfoWindow({
@@ -603,12 +605,12 @@
       </script>
     </main>
 
-    <!--   HIDDEN SCREEN   -->
+    <!--   HIDDEN SCREEN: Review Entry Detail Screen   -->
     <main id="div5" class="screen main-content" style="display:none;">
 
       <article id="review-content" style="padding:10px;">
         <center style="background-color: lightblue;">
-          <h1>USER REVIEW</h1>
+          <h1 style="font-family: 'Courier New', Courier, monospace; font-weight:bold;">USER REVIEW</h1>
         </center>
         <button class="mdc-icon-button material-icons back-button">
             <div class="mdc-icon-button__ripple"></div>

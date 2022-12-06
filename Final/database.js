@@ -82,7 +82,7 @@ database.notes.toArray()
 
     let noteNameText = document.createElement("span")
     noteNameText.setAttribute("class", "mdc-list-item__primary-text")
-    noteNameText.setAttribute("style", "font-size:1.5em; font-weight:bold;")
+    noteNameText.setAttribute("style", "font-size:1.5em; font-weight:bold; font-family: 'Courier New', Courier, monospace;")
     noteNameText.innerHTML = record.name + " said:";
 
     let noteBodyText = document.createElement("span")
@@ -137,7 +137,7 @@ submitBtn.addEventListener("click", (event) => {
 
     let noteNameText = document.createElement("span")
     noteNameText.setAttribute("class", "mdc-list-item__primary-text")
-    noteNameText.setAttribute("style", "font-size:1.5em; font-weight:bold;")
+    noteNameText.setAttribute("style", "font-size:1.5em; font-weight:bold; font-family: 'Courier New', Courier, monospace;")
     noteNameText.innerHTML = name_entry.value + " said:";
 
     let noteBodyText = document.createElement("span")
@@ -180,8 +180,8 @@ submitBtn.addEventListener("click", (event) => {
     // Click on the item to view the item in full detail (in another screen)
     noteItem.addEventListener("click", (event) => {
       // Set the contents
-      document.querySelector(".user-name").innerHTML = name_entry.value + " said:";
-      document.querySelector(".user-body").innerHTML = body_entry.value;
+      document.querySelector(".user-name").innerHTML = noteNameText.innerHTML + " said:";
+      document.querySelector(".user-body").innerHTML = noteBodyText.innerHTML;
 
       // Switch screens
       document.querySelector("#div3").style.display = "none";
