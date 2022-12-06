@@ -1,3 +1,21 @@
+// Features
+var createButton = document.querySelector(".create-note-button")
+var displayCreateNote = document.querySelector("#create-note-window");
+
+// User create a note in another screen 'creation screen'
+createButton.addEventListener("click", (event) => {
+  console.log("Works")
+  displayCreateNote.style.display = "block";
+})
+
+// User can exit the creation screen by clicking outside of it
+window.onclick = function(event) {
+  if (event.target == displayCreateNote) {
+    displayCreateNote.style.display = "none";
+  }
+}
+
+// DATABASE BELOW
 class Note {
   constructor(name, body) {
     this.name = name;
@@ -39,24 +57,6 @@ database.notes.toArray()
   .then(arr => arr.forEach(item => {
     console.log(item.id)
   }));
-
-
-// Update every note from the notes database
-function updateNote(data) {
-  database.notes.toArray()
-    .then(arr => arr.forEach(record => {
-      if (record.id == data.id) {  // Find matching id, in order to make changes
-        database.notes.update(record.id, { "name": data.name, "body": data.body })
-          .then(function(updated) {  // Check if the note is updated or not
-            if (updated) {
-              console.log("It is updated")
-            } else {
-              console.log("It is NOT updated")
-            }
-          })
-      }
-    }))
-}
 
 console.log("What is going on")
 
@@ -107,78 +107,76 @@ database.notes.toArray()
   }));
 
 // When the user create a note, the note will be added to the list
+let submitBtn = document.querySelector(".submit-note-button")
+submitBtn.addEventListener("click", (event) => {
+  displayCreateNote.style.display = "none";
+  
+  // Get the user's inputs
+  let name_entry = document.querySelector("#user-name-entry")
+  let body_entry = document.querySelector("#user-body-entry")
 
-// database.notes.toArray()
-//   .then(arr => arr.forEach(record => {
-//     log.console("Making a list note")
+  if (name_entry.value != "" && body_entry.value != "") {
+    // Create a new note item (creating the HTML elements)
+    let noteItem = document.createElement("li");
+    noteItem.setAttribute("class", "mdc-list-item note-list-item")
 
-//     // Create a new note item (creating the HTML elements)
-//     let noteItem = document.createElement("li")
-//     noteItem.setAttribute("class", "mdc-list-item note-list-item")
-//     noteItem.setAttribute("id", "note-item" + record.id)
+    let noteRipple = document.createElement("span");
+    noteRipple.setAttribute("class", "mdc-list-item__ripple")
+    noteItem.appendChild(noteRipple)
 
-//     let noteRipple = document.createElement("span");
-//     noteRipple.setAttribute("class", "mdc-list-item__ripple")
-//     noteItem.appendChild(noteRipple)
+    let noteText = document.createElement("span");
+    noteText.setAttribute("class", "mdc-list-item__text")
 
-//     let noteText = document.createElement("span");
-//     noteText.setAttribute("class", "mdc-list-item__text")
+    let noteNameText = document.createElement("span")
+    noteNameText.setAttribute("class", "mdc-list-item__primary-text")
+    noteNameText.innerHTML = name_entry.value;
 
-//     let noteNameText = document.createElement("span")
-//     noteTitleText.setAttribute("class", "mdc-list-item__primary-text")
+    let noteBodyText = document.createElement("span")
+    noteBodyText.setAttribute("class", "mdc-list-item__secondary-text")
+    noteBodyText.innerHTML = body_entry.value;
 
-//     let noteBodyText = document.createElement("span")
-//     noteBodyText.setAttribute("class", "mdc-list-item__secondary-text")
+    // Prepare the new note entry for the database
+    var newNote = new Note;
+    newNote.name = name_entry.value;
+    newNote.body = body_entry.value;
 
-//     noteText.appendChild(noteNameText)
-//     noteText.appendChild(noteBodyText)
-//     noteItem.appendChild(noteText)
+    // Get the id number of the new note entry
+    let noteIdNum = 0;
 
-//     // Insert the title and body info
-//     noteItem.querySelector(".mdc-list-item__primary-text").innerHTML = record.name;
-//     noteItem.querySelector(".mdc-list-item__secondary-text").innerHTML = record.body;
-
-//     // Append the note item to the list screen
-//     document.querySelector("review-list.mdc-list.mdc-list--two-line").appendChild(noteItem);
-//     console.log(noteItem);
-
-//     // Click on the item to switch screens
-//     // in order, to view note in full
-//     noteItem.addEventListener("click", (event) => {
-//       document.querySelector("#div3").style.display = "none;"
-//         document.querySelector("#div5").style.display = "block;"
-//     })
-//   }));
-
-
-
-
-
+    // Add the new note entry to the database
+    database.notes.add(newNote)
+    .then(result => {
+      console.log("Added to the database sucessfully")
+      
+      // Set the id to the note item
+      noteItem.setAttribute("id", "note-item" + result)
+    })
+    .catch(error => console.log(error))
 
 
+    // Append the HTML contents to the note item
+    noteText.appendChild(noteNameText)
+    noteText.appendChild(noteBodyText)
+    noteItem.appendChild(noteRipple)
+    noteItem.appendChild(noteText)
 
+    // Append the note item to the list
+    document.querySelector(".mdc-list--two-line").appendChild(noteItem)
 
+    // Click on the item to view the item in full detail (in another screen)
+    noteItem.addEventListener("click", (event) => {
+      // Set the contents
+      document.querySelector(".user-name").innerHTML = name_entry.value;
+      document.querySelector(".user-body").innerHTML = body_entry.value;
 
-// Features
-var createButton = document.querySelector(".create-note-button")
-var displayCreateNote = document.querySelector("#create-note-window");
-
-// User create a note in another screen 'creation screen'
-createButton.addEventListener("click", (event) => {
-  console.log("Works")
-  displayCreateNote.style.display = "block";
-})
-
-// User can exit the creation screen by clicking outside of it
-window.onclick = function(event) {
-  if (event.target == displayCreateNote) {
-    displayCreateNote.style.display = "none";
+      // Switch screens
+      document.querySelector("#div3").style.display = "none";
+      document.querySelector("#div5").style.display = "block";
+    })
+    
+  } else {
+    // Alert the user that they must fill both the textfields
+    alert("At least one of the textfields is empty. Please double check if you fill both of them out.")
   }
-}
-
-
-// let list = document.querySelector(".mdc-list--two-line")
-// list.addEventListener("click", (event) => {
-//   document.querySelector("#div3").style.display = "none";
-//   document.querySelector("#div5").style.display = "block";
-// })
+  console.log(name_entry.value)
+})
