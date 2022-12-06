@@ -102,7 +102,7 @@ database.notes.toArray()
     // Click on the item to view the item in full detail (in another screen)
     noteItem.addEventListener("click", (event) => {
       // Set the contents
-      document.querySelector(".user-name").innerHTML = record.name + " said:";
+      document.querySelector(".user-name").innerHTML = record.name;
       document.querySelector(".user-body").innerHTML = record.body;
 
       // Switch screens
@@ -180,7 +180,7 @@ submitBtn.addEventListener("click", (event) => {
     // Click on the item to view the item in full detail (in another screen)
     noteItem.addEventListener("click", (event) => {
       // Set the contents
-      document.querySelector(".user-name").innerHTML = noteNameText.innerHTML + " said:";
+      document.querySelector(".user-name").innerHTML = noteNameText.innerHTML;
       document.querySelector(".user-body").innerHTML = noteBodyText.innerHTML;
 
       // Switch screens
