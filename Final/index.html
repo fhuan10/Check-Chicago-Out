@@ -20,6 +20,8 @@
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   <!-- Google Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!--  Dexie Database  -->
+  <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
 </head>
 
 <body>
@@ -38,30 +40,26 @@
     <div class="mdc-drawer__content">
       <div class="mdc-list">
 
-        <a class="mdc-list-item mdc-list-item--activated" href="" data-screen="div1" aria-current="page">
+        <a class="mdc-list-item nav-tab mdc-list-item--activated" href="" data-screen="div1" aria-current="page">
           <span class="mdc-list-item__ripple"></span>
           <span class="mdc-list-item__text" data-screen="div1">Home</span>
         </a>
 
-        <a class="mdc-list-item" href="" data-screen="div2">
+        <a class="mdc-list-item nav-tab" href="" data-screen="div2">
           <span class="mdc-list-item__ripple"></span>
           <span class="mdc-list-item__text" data-screen="div2">Articles</span>
         </a>
 
-        <a class="mdc-list-item" href="" data-screen="div3">
+        <a class="mdc-list-item nav-tab" href="" data-screen="div3">
           <span class="mdc-list-item__ripple"></span>
           <span class="mdc-list-item__text" data-screen="div3">PostBoard</span>
         </a>
 
-        <a class="mdc-list-item" href="" data-screen="div3">
+        <a class="mdc-list-item nav-tab" href="" data-screen="div4">
           <span class="mdc-list-item__ripple"></span>
           <span class="mdc-list-item__text" data-screen="div4">Movies Playing</span>
         </a>
 
-        <a class="mdc-list-item" href="" data-screen="div3">
-          <span class="mdc-list-item__ripple"></span>
-          <span class="mdc-list-item__text" data-screen="div5">PostBoard</span>
-        </a>
       </div>
     </div>
   </aside>
@@ -73,25 +71,71 @@
       <img class="home-bg" src="images/theBean.jpg">
       <h1 class="home-title">CHICAGO</h1>
 
-      <p class="home-text">Click on the top left icon to view other pages</p>
+      <p class="home-text">To get started, click on the top left icon.</p>
 
     </main>
 
     <!--   Article Search   -->
     <main id="div2" class="screen main-content" style="display:none;">
       <center>
-        <h1 style="font-family: 'Courier New', Courier, monospace; background-color:lightblue;"><strong>CHECK OUT THE NEWS ABOUT CHICAGO</strong></h1>
+        <h1 style="font-family: 'Courier New', Courier, monospace; background-color:lightblue;"><strong>CHECK OUT THE
+            NEWS ABOUT CHICAGO</strong></h1>
       </center>
       <div class="article-container"></div>
     </main>
 
     <!--   PostBoard: What do you think of Chicago?   -->
     <main id="div3" class="screen main-content" style="display:none;">
-      <h1 style="font-family: 'Courier New', Courier, monospace; background-color:lightblue; text-align: center;"><strong>THOUGHTS ABOUT CHICAGO? WRITE IT DOWN!</strong></h1>
-      <div>
-      <!--     Same thing as the Note App (Include the IndexDB)     -->
+      <h1 style="font-family: 'Courier New', Courier, monospace; background-color:lightblue; text-align: center;">
+        <strong>THOUGHTS ABOUT CHICAGO? WRITE IT DOWN!</strong>
+      </h1>
+
+      <!--    A modal window to write review    -->
+      <div id="create-note-window">
+        <div class="create-note-content">
+          <section>
+            <center>
+              <h1 style="background-color:lightblue; font-family: 'Courier New', Courier, monospace;"><b>WRITE A
+                  REVIEW</b></h1>
+              <br>
+              <h3 style="background-color: lightblue; font-family: 'Courier New', Courier, monospace;"><b>Enter your
+                  name</b></h3>
+              <input type="text" id="user-name" style="width:70%;" name="user-name">
+              <br>
+              <br>
+
+              <section style="background-color: lightblue; font-family: 'Courier New', Courier, monospace;">
+                <h3><b>Share your thoughts about Chicago</b></h3>
+                <h5><b>(It could be about your favorite place, moment, experience, etc.)</b></h5>
+              </section>
+
+              <textarea id="note-body" name="note-body" rows="12" cols="150" style="resize: none; width:95%"></textarea>
+              <br>
+              <br>
+              <button class="mdc-button mdc-button--raised submit-note-button">
+                <span class="mdc-button__label">Submit</span>
+              </button>
+            </center>
+          </section>
+        </div>
       </div>
-      
+
+
+      <div id="post-screen">
+        <center>
+          <button class="mdc-button mdc-button--outlined mdc-button--icon-leading create-note-button">
+            <span class="mdc-button__ripple"></span>
+            <span class="mdc-button__label">Create a Note</span>
+          </button>
+        </center>
+
+        <div class="review-list">
+          <ul class="mdc-list mdc-list--two-line">
+            <!-- This is where all the reviews are stored in -->
+
+          </ul>
+        </div>
+
     </main>
 
     <!--   Movies Playing   -->
@@ -558,8 +602,12 @@
       </script>
     </main>
 
-    <!--   What Do You Think of Chicago Reviews   -->
+    <!--   HIDDEN SCREEN   -->
     <main id="div5" class="screen main-content" style="display:none;">
+      <section id="review-content">
+        <h1 class="user-name"></h1>
+        <p class="user-body"></p>
+      </section>
 
     </main>
   </div>
@@ -567,6 +615,7 @@
   <script src="final.js"></script>
   <script src="chicagoArticles.js"></script>
   <script src="displayFilter.js"></script>
+  <script src="database.js"></script>
 </body>
 
 </html>

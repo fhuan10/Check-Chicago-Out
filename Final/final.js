@@ -24,7 +24,7 @@ console.log(document.querySelectorAll(".mdc-list-item"))
 
 // Switch screens from the navigation drawer by looping through
 // the mdc-list-items where all have an even listener added to it
-document.querySelectorAll(".mdc-list-item").forEach(item => {
+document.querySelectorAll(".mdc-list-item.nav-tab").forEach(item => {
   item.addEventListener("click", (event) => {
 
     event.preventDefault();
