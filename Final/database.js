@@ -12,6 +12,10 @@ createButton.addEventListener("click", (event) => {
 window.onclick = function(event) {
   if (event.target == displayCreateNote) {
     displayCreateNote.style.display = "none";
+
+    // Erase the user's input
+    document.querySelector("#user-name-entry").value="";
+    document.querySelector("#user-body-entry").value="";
   }
 }
 
@@ -63,13 +67,12 @@ console.log("What is going on")
 // Populate the records into the review list (for the first time)
 database.notes.toArray()
   .then(arr => arr.forEach(record => {
-    console.log("Heee")
-    console.log(record.id)
 
     // Create a new note item (creating the HTML elements)
     let noteItem = document.createElement("li")
     noteItem.setAttribute("id", "note-item" + record.id)
     noteItem.setAttribute("class", "mdc-list-item note-list-item")
+    noteItem.setAttribute("style", "border-bottom:solid; border-top:solid; border-color:white;")
 
     let noteRipple = document.createElement("span");
     noteRipple.setAttribute("class", "mdc-list-item__ripple")
@@ -79,10 +82,12 @@ database.notes.toArray()
 
     let noteNameText = document.createElement("span")
     noteNameText.setAttribute("class", "mdc-list-item__primary-text")
-    noteNameText.innerHTML = record.name;
+    noteNameText.setAttribute("style", "font-size:1.5em; font-weight:bold;")
+    noteNameText.innerHTML = record.name + " said:";
 
     let noteBodyText = document.createElement("span")
     noteBodyText.setAttribute("class", "mdc-list-item__secondary-text")
+    noteBodyText.setAttribute("style", "text-overflow: ellipsis; overflow: hidden; width:60em;")
     noteBodyText.innerHTML = record.body;
 
     // Append the HTML contents in the note item
@@ -97,7 +102,7 @@ database.notes.toArray()
     // Click on the item to view the item in full detail (in another screen)
     noteItem.addEventListener("click", (event) => {
       // Set the contents
-      document.querySelector(".user-name").innerHTML = record.name;
+      document.querySelector(".user-name").innerHTML = record.name + " said:";
       document.querySelector(".user-body").innerHTML = record.body;
 
       // Switch screens
@@ -109,16 +114,19 @@ database.notes.toArray()
 // When the user create a note, the note will be added to the list
 let submitBtn = document.querySelector(".submit-note-button")
 submitBtn.addEventListener("click", (event) => {
-  displayCreateNote.style.display = "none";
   
   // Get the user's inputs
   let name_entry = document.querySelector("#user-name-entry")
   let body_entry = document.querySelector("#user-body-entry")
 
   if (name_entry.value != "" && body_entry.value != "") {
+    // Close the creation modal screen
+    displayCreateNote.style.display = "none";
+    
     // Create a new note item (creating the HTML elements)
     let noteItem = document.createElement("li");
     noteItem.setAttribute("class", "mdc-list-item note-list-item")
+    noteItem.setAttribute("style", "border-bottom:solid; border-top:solid; border-color:white;")
 
     let noteRipple = document.createElement("span");
     noteRipple.setAttribute("class", "mdc-list-item__ripple")
@@ -129,10 +137,12 @@ submitBtn.addEventListener("click", (event) => {
 
     let noteNameText = document.createElement("span")
     noteNameText.setAttribute("class", "mdc-list-item__primary-text")
-    noteNameText.innerHTML = name_entry.value;
+    noteNameText.setAttribute("style", "font-size:1.5em; font-weight:bold;")
+    noteNameText.innerHTML = name_entry.value + " said:";
 
     let noteBodyText = document.createElement("span")
     noteBodyText.setAttribute("class", "mdc-list-item__secondary-text")
+    noteBodyText.setAttribute("style", "text-overflow: ellipsis; overflow: hidden; width:60em;")
     noteBodyText.innerHTML = body_entry.value;
 
     // Prepare the new note entry for the database
@@ -163,10 +173,14 @@ submitBtn.addEventListener("click", (event) => {
     // Append the note item to the list
     document.querySelector(".mdc-list--two-line").appendChild(noteItem)
 
+    // Erase the user's inputs once done
+    document.querySelector("#user-name-entry").value="";
+    document.querySelector("#user-body-entry").value=""; 
+
     // Click on the item to view the item in full detail (in another screen)
     noteItem.addEventListener("click", (event) => {
       // Set the contents
-      document.querySelector(".user-name").innerHTML = name_entry.value;
+      document.querySelector(".user-name").innerHTML = name_entry.value + " said:";
       document.querySelector(".user-body").innerHTML = body_entry.value;
 
       // Switch screens

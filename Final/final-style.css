@@ -73,7 +73,7 @@ body {
   width: 350px;
 }
 
-/*  */
+/* Screen 3: Postboard */
 
 #div3 {
   background-image:url(images/chicagoView.jpeg);
@@ -81,18 +81,17 @@ body {
   background-size: auto;
   background-position: center;
   background-attachment: fixed;
-  background-size: 100% 75%
+  background-size: 100% 75%;
 }
 
 #post-screen {
   border: 2px #FF0000 dotted;
-  height:100vh;
   display:block;
-  background-color:white;
+  background-color:lightblue;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
-  opacity: 70%;
+  opacity: 80%;
 }
 
 .create-note-button {
@@ -124,6 +123,33 @@ body {
   width: 80%; /* Could be more or less, depending on screen size */
 }
 
+.note-list-item {
+  border-bottom-color:white;
+}
+
+.mdc-list-item__secondary-text {
+  padding-bottom:10px;
+}
+
+.user-review-content {
+  background-color: lightblue;
+  height: 80%;
+}
+
+.user-name {
+  padding-left:10px;
+}
+
+.user-body {
+  padding-left:30px;
+  font-size: 2em;
+}
+
+.back-button {
+  position: fixed;
+  bottom:55px;
+}
+
 /* Screen 4: Movies Playing */
 
 /* Set the size of the div element that contains the map */
@@ -133,12 +159,3 @@ body {
   width: 100%;
   /* The width is the width of the web page */
 }
-
-
-<li class="mdc-list-item review" tabindex="0">
-              <span class="mdc-list-item__ripple"></span>
-              <span class="mdc-list-item__text">
-                <span class="mdc-list-item__primary-text">Two-line item</span>
-                <span class="mdc-list-item__secondary-text">Secondary text</span>
-              </span>
-            </li>

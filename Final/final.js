@@ -39,3 +39,10 @@ document.querySelectorAll(".mdc-list-item.nav-tab").forEach(item => {
     drawer.open = false;  // Close the navigation drawer
   })
 })
+
+// Back button (Go back to the Postboard screen)
+const backBtn = document.querySelector(".back-button")
+backBtn.addEventListener("click", (event) => {
+  document.querySelector("#div5").style.display = "none";
+  document.querySelector("#div3").style.display = "block";
+})

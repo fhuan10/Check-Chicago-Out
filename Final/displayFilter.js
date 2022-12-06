@@ -41,7 +41,7 @@ function createDropDown() {
   let dropDown = document.createElement("select")
   dropDown.setAttribute("id", "movie-location")
   dropDown.setAttribute("name", "movie-location")
-  dropDown.setAttribute("style", "padding:10px; width:95%; font-size:2em; font-family: 'Courier New', Courier, monospace;")
+  dropDown.setAttribute("style", "padding:10px; width:100%; font-size:2em; font-family: 'Courier New', Courier, monospace;")
 
   // Have to fetch API
   let movieURL = "https://data.cityofchicago.org/resource/7piw-z6r6.json"

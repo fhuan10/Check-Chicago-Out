@@ -109,7 +109,8 @@
                 <h5><b>(It could be about your favorite place, moment, experience, etc.)</b></h5>
               </section>
 
-              <textarea id="user-body-entry" name="user-body-entry" rows="12" cols="150" style="resize: none; width:95%"></textarea>
+              <textarea id="user-body-entry" name="user-body-entry" rows="12" cols="150"
+                style="resize: none; width:95%"></textarea>
               <br>
               <br>
               <button class="mdc-button mdc-button--raised submit-note-button">
@@ -123,9 +124,9 @@
 
       <div id="post-screen">
         <center>
-          <button class="mdc-button mdc-button--outlined mdc-button--icon-leading create-note-button">
+          <button class="mdc-button mdc-button--unelevated create-note-button">
             <span class="mdc-button__ripple"></span>
-            <span class="mdc-button__label">Create a Note</span>
+            <span class="mdc-button__label">Create a Review</span>
           </button>
         </center>
 
@@ -604,10 +605,22 @@
 
     <!--   HIDDEN SCREEN   -->
     <main id="div5" class="screen main-content" style="display:none;">
-      <section id="review-content">
-        <h1 class="user-name"></h1>
-        <p class="user-body"></p>
-      </section>
+
+      <article id="review-content" style="padding:10px;">
+        <center style="background-color: lightblue;">
+          <h1>USER REVIEW</h1>
+        </center>
+        <button class="mdc-icon-button material-icons back-button">
+            <div class="mdc-icon-button__ripple"></div>
+            arrow_back
+          </button>
+        <div class="user-review-content">
+          <u>
+            <h1 class="user-name"></h1>
+          </u>
+          <p class="user-body"></p>
+        </div>
+      </article>
 
     </main>
   </div>
