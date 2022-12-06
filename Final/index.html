@@ -140,7 +140,7 @@
     </main>
 
     <!--   Movies Playing   -->
-    <main id="div4" class="screen main-content" style="display:none;">
+    <main id="div4" class="screen main-content" style="display:none; scroll-behavior: smooth;">
       <center>
         <h1 style="font-family: 'Courier New', Courier, monospace; background-color:lightblue;"><strong>CHECK OUT THE
             MOVIES THAT ARE PLAYING IN CHICAGO RIGHT NOW</strong></h1>
@@ -192,6 +192,13 @@
       </center>
 
       <br>
+      <center>
+        <h2 class="filtered-result-text"
+          style="font-family: 'Courier New', Courier, monospace; background-color:lightblue; display:none">
+          <strong><u>HERE ARE THE
+              RESULTS</u></strong>
+        </h2>
+      </center>
       <!--  TODO: Display the results   -->
       <div class="movie-container-filter-results"></div>
 
@@ -266,6 +273,12 @@
               const submitBttn = document.querySelector(".submit-button")
 
               submitBttn.addEventListener("click", (event) => {
+                // Show the filtered result text
+                document.querySelector(".filtered-result-text").style.display = "block";
+
+                // Remove all the filtered results
+                document.querySelector(".movie-container-filter-results").innerHTML = "";
+
                 // Make all the markers hidden
                 markers.forEach((marker) => {
                   marker.setMap(null);
@@ -301,8 +314,6 @@
 
                     // Tells information about the location
                     let locationContentString = "<h5>" + record.title + "</h5><b><u>Movie Rating:</u></b> " + record.rating + "<br><br><b><u>When:</u></b> " + record.date.substring(0, 10) + "<br><br><b><u>Place:</u></b> " + record.park + "<br><b><u>Address:</u></b> " + record.park_address + "<br><b><u>Phone Number:</u></b> " + record.park_phone;
-                    // //TEST HERE
-                    // document.querySelector(".movie-container-filter-results").append(locationContentString);
 
                     // Create the info window, setting the content to the locationContentString
                     var infowindow = new google.maps.InfoWindow({
@@ -320,6 +331,72 @@
 
                     // Store the marker
                     markers.push(marker)
+
+                    // Create card for each filtered result
+                    let card = document.createElement("div")
+                    card.setAttribute("class", "mdc-card mdc-card--outlined movie-filtered-card")
+
+                    // Create the card's contents
+                    let cardContent = document.createElement("div")
+                    cardContent.setAttribute("class", "mdc-card__content");
+
+                    let cardMovie = document.createElement("h2");
+                    cardMovie.setAttribute("class", "movie-title"
+                    )
+                    cardMovie.innerHTML = record.title;
+
+                    let cardRating = document.createElement("h6");
+                    cardRating.setAttribute("class", "movie-rating"
+                    )
+                    cardRating.innerHTML = "<i>" + record.rating + "</i>";
+
+                    let cardTime = document.createElement("h7");
+                    cardTime.setAttribute("class", "movie-time")
+                    cardTime.innerHTML = "<b><u>When:</u></b> " + record.date.substring(0, 10)
+
+                    let cardLocation = document.createElement("h7")
+                    cardLocation.setAttribute("class", "movie-location")
+                    cardLocation.innerHTML = "<br><b><u>Place:</u></b> " + record.park + "<br><b><u>Address:</u></b> " + record.park_address + "<br><b><u>Phone Number:</u></b> " + record.park_phone + "<br>";
+
+                    // Append the card contents to the card itself
+                    cardContent.appendChild(cardMovie)
+                    cardContent.appendChild(cardRating)
+                    cardContent.appendChild(cardTime)
+                    cardContent.appendChild(cardLocation)
+
+                    card.appendChild(cardContent)
+
+                    // Create a button that shows where the movie is taking place
+                    let cardButton = document.createElement("button");
+                    cardButton.setAttribute("class", "mdc-button mdc-button--outlined card-location-button")
+
+                    let cardButtonRipple = document.createElement("span");
+                    cardButtonRipple.setAttribute("class", "mdc-button__ripple")
+                    let cardButtonLabel = document.createElement("span");
+                    cardButtonLabel.setAttribute("class", "mdc-button__label")
+                    cardButtonLabel.innerText = "Find it on the map"
+
+                    // Append the button's contents to the button
+                    // Then, append the button to the card
+                    cardButton.appendChild(cardButtonRipple)
+                    cardButton.appendChild(cardButtonLabel)
+                    card.appendChild(cardButton)
+
+                    cardButton.addEventListener("click", (event) => {
+                      document.querySelector("#div4").scrollTop = 0;
+
+                      // Display the mark on Google maps
+                      infowindow.open({
+                        anchor: marker,
+                        map,
+                        shouldFocus: false,
+                      });
+                    })
+
+                    // Append the card to the filtered result 'list'
+                    // below the filter
+                    document.querySelector(".movie-container-filter-results").append(card)
+
 
                   }  // Only day filter
                   else if (dayCheckBoxes.length != 0 && ratingCheckBoxes.length == 0 && movieLocationOption == "") {
@@ -357,6 +434,71 @@
 
                         // Store the marker
                         markers.push(marker)
+
+                        // Create card for each filtered result
+                        let card = document.createElement("div")
+                        card.setAttribute("class", "mdc-card mdc-card--outlined movie-filtered-card")
+
+                        // Create the card's contents
+                        let cardContent = document.createElement("div")
+                        cardContent.setAttribute("class", "mdc-card__content");
+
+                        let cardMovie = document.createElement("h2");
+                        cardMovie.setAttribute("class", "movie-title"
+                        )
+                        cardMovie.innerHTML = record.title;
+
+                        let cardRating = document.createElement("h6");
+                        cardRating.setAttribute("class", "movie-rating"
+                        )
+                        cardRating.innerHTML = "<i>" + record.rating + "</i>";
+
+                        let cardTime = document.createElement("h7");
+                        cardTime.setAttribute("class", "movie-time")
+                        cardTime.innerHTML = "<b><u>When:</u></b> " + record.date.substring(0, 10)
+
+                        let cardLocation = document.createElement("h7")
+                        cardLocation.setAttribute("class", "movie-location")
+                        cardLocation.innerHTML = "<br><b><u>Place:</u></b> " + record.park + "<br><b><u>Address:</u></b> " + record.park_address + "<br><b><u>Phone Number:</u></b> " + record.park_phone + "<br>";
+
+                        // Append the card contents to the card itself
+                        cardContent.appendChild(cardMovie)
+                        cardContent.appendChild(cardRating)
+                        cardContent.appendChild(cardTime)
+                        cardContent.appendChild(cardLocation)
+
+                        card.appendChild(cardContent)
+
+                        // Create a button that shows where the movie is taking place
+                        let cardButton = document.createElement("button");
+                        cardButton.setAttribute("class", "mdc-button mdc-button--outlined card-location-button")
+
+                        let cardButtonRipple = document.createElement("span");
+                        cardButtonRipple.setAttribute("class", "mdc-button__ripple")
+                        let cardButtonLabel = document.createElement("span");
+                        cardButtonLabel.setAttribute("class", "mdc-button__label")
+                        cardButtonLabel.innerText = "Find it on the map"
+
+                        // Append the button's contents to the button
+                        // Then, append the button to the card
+                        cardButton.appendChild(cardButtonRipple)
+                        cardButton.appendChild(cardButtonLabel)
+                        card.appendChild(cardButton)
+
+                        cardButton.addEventListener("click", (event) => {
+                          document.querySelector("#div4").scrollTop = 0;
+
+                          // Display the mark on Google maps
+                          infowindow.open({
+                            anchor: marker,
+                            map,
+                            shouldFocus: false,
+                          });
+                        })
+
+                        // Append the card to the filtered result 'list'
+                        // below the filter
+                        document.querySelector(".movie-container-filter-results").append(card)
                       }
                     })
                   }  // Only rating filter
@@ -395,6 +537,71 @@
 
                         // Store the marker
                         markers.push(marker)
+
+                        // Create card for each filtered result
+                        let card = document.createElement("div")
+                        card.setAttribute("class", "mdc-card mdc-card--outlined movie-filtered-card")
+
+                        // Create the card's contents
+                        let cardContent = document.createElement("div")
+                        cardContent.setAttribute("class", "mdc-card__content");
+
+                        let cardMovie = document.createElement("h2");
+                        cardMovie.setAttribute("class", "movie-title"
+                        )
+                        cardMovie.innerHTML = record.title;
+
+                        let cardRating = document.createElement("h6");
+                        cardRating.setAttribute("class", "movie-rating"
+                        )
+                        cardRating.innerHTML = "<i>" + record.rating + "</i>";
+
+                        let cardTime = document.createElement("h7");
+                        cardTime.setAttribute("class", "movie-time")
+                        cardTime.innerHTML = "<b><u>When:</u></b> " + record.date.substring(0, 10)
+
+                        let cardLocation = document.createElement("h7")
+                        cardLocation.setAttribute("class", "movie-location")
+                        cardLocation.innerHTML = "<br><b><u>Place:</u></b> " + record.park + "<br><b><u>Address:</u></b> " + record.park_address + "<br><b><u>Phone Number:</u></b> " + record.park_phone + "<br>";
+
+                        // Append the card contents to the card itself
+                        cardContent.appendChild(cardMovie)
+                        cardContent.appendChild(cardRating)
+                        cardContent.appendChild(cardTime)
+                        cardContent.appendChild(cardLocation)
+
+                        card.appendChild(cardContent)
+
+                        // Create a button that shows where the movie is taking place
+                        let cardButton = document.createElement("button");
+                        cardButton.setAttribute("class", "mdc-button mdc-button--outlined card-location-button")
+
+                        let cardButtonRipple = document.createElement("span");
+                        cardButtonRipple.setAttribute("class", "mdc-button__ripple")
+                        let cardButtonLabel = document.createElement("span");
+                        cardButtonLabel.setAttribute("class", "mdc-button__label")
+                        cardButtonLabel.innerText = "Find it on the map"
+
+                        // Append the button's contents to the button
+                        // Then, append the button to the card
+                        cardButton.appendChild(cardButtonRipple)
+                        cardButton.appendChild(cardButtonLabel)
+                        card.appendChild(cardButton)
+
+                        cardButton.addEventListener("click", (event) => {
+                          document.querySelector("#div4").scrollTop = 0;
+
+                          // Display the mark on Google maps
+                          infowindow.open({
+                            anchor: marker,
+                            map,
+                            shouldFocus: false,
+                          });
+                        })
+
+                        // Append the card to the filtered result 'list'
+                        // below the filter
+                        document.querySelector(".movie-container-filter-results").append(card)
                       }
                     })
 
@@ -434,6 +641,73 @@
 
                           // Store the marker
                           markers.push(marker)
+
+                          // Create card for each filtered result
+                          let card = document.createElement("div")
+                          card.setAttribute("class", "mdc-card mdc-card--outlined movie-filtered-card")
+
+                          // Create the card's contents
+                          let cardContent = document.createElement("div")
+                          cardContent.setAttribute("class", "mdc-card__content");
+
+                          let cardMovie = document.createElement("h2");
+                          cardMovie.setAttribute("class", "movie-title"
+                          )
+                          cardMovie.innerHTML = record.title;
+
+                          let cardRating = document.createElement("h6");
+                          cardRating.setAttribute("class", "movie-rating"
+                          )
+                          cardRating.innerHTML = "<i>" + record.rating + "</i>";
+
+                          let cardTime = document.createElement("h7");
+                          cardTime.setAttribute("class", "movie-time")
+                          cardTime.innerHTML = "<b><u>When:</u></b> " + record.date.substring(0, 10)
+
+                          let cardLocation = document.createElement("h7")
+                          cardLocation.setAttribute("class", "movie-location")
+                          cardLocation.innerHTML = "<br><b><u>Place:</u></b> " + record.park + "<br><b><u>Address:</u></b> " + record.park_address + "<br><b><u>Phone Number:</u></b> " + record.park_phone + "<br>";
+
+                          // Append the card contents to the card itself
+                          cardContent.appendChild(cardMovie)
+                          cardContent.appendChild(cardRating)
+                          cardContent.appendChild(cardTime)
+                          cardContent.appendChild(cardLocation)
+
+                          card.appendChild(cardContent)
+
+                          // Create a button that shows where the movie is taking place
+                          let cardButton = document.createElement("button");
+                          cardButton.setAttribute("class", "mdc-button mdc-button--outlined card-location-button")
+
+                          let cardButtonRipple = document.createElement("span");
+                          cardButtonRipple.setAttribute("class", "mdc-button__ripple")
+                          let cardButtonLabel = document.createElement("span");
+                          cardButtonLabel.setAttribute("class", "mdc-button__label")
+                          cardButtonLabel.innerText = "Find it on the map"
+
+                          // Append the button's contents to the button
+                          // Then, append the button to the card
+                          cardButton.appendChild(cardButtonRipple)
+                          cardButton.appendChild(cardButtonLabel)
+                          card.appendChild(cardButton)
+
+                          cardButton.addEventListener("click", (event) => {
+                            document.querySelector("#div4").scrollTop = 0;
+
+                            // Display the mark on Google maps
+                            infowindow.open({
+                              anchor: marker,
+                              map,
+                              shouldFocus: false,
+                            });
+                          })
+
+                          // Append the card to the filtered result 'list'
+                          // below the filter
+                          document.querySelector(".movie-container-filter-results").append(card)
+
+
                         }
                       })
                     })
@@ -471,6 +745,70 @@
                     // Store the marker
                     markers.push(marker)
 
+                    // Create card for each filtered result
+                    let card = document.createElement("div")
+                    card.setAttribute("class", "mdc-card mdc-card--outlined movie-filtered-card")
+
+                    // Create the card's contents
+                    let cardContent = document.createElement("div")
+                    cardContent.setAttribute("class", "mdc-card__content");
+
+                    let cardMovie = document.createElement("h2");
+                    cardMovie.setAttribute("class", "movie-title"
+                    )
+                    cardMovie.innerHTML = record.title;
+
+                    let cardRating = document.createElement("h6");
+                    cardRating.setAttribute("class", "movie-rating"
+                    )
+                    cardRating.innerHTML = "<i>" + record.rating + "</i>";
+
+                    let cardTime = document.createElement("h7");
+                    cardTime.setAttribute("class", "movie-time")
+                    cardTime.innerHTML = "<b><u>When:</u></b> " + record.date.substring(0, 10)
+
+                    let cardLocation = document.createElement("h7")
+                    cardLocation.setAttribute("class", "movie-location")
+                    cardLocation.innerHTML = "<br><b><u>Place:</u></b> " + record.park + "<br><b><u>Address:</u></b> " + record.park_address + "<br><b><u>Phone Number:</u></b> " + record.park_phone + "<br>";
+
+                    // Append the card contents to the card itself
+                    cardContent.appendChild(cardMovie)
+                    cardContent.appendChild(cardRating)
+                    cardContent.appendChild(cardTime)
+                    cardContent.appendChild(cardLocation)
+
+                    card.appendChild(cardContent)
+
+                    // Create a button that shows where the movie is taking place
+                    let cardButton = document.createElement("button");
+                    cardButton.setAttribute("class", "mdc-button mdc-button--outlined card-location-button")
+
+                    let cardButtonRipple = document.createElement("span");
+                    cardButtonRipple.setAttribute("class", "mdc-button__ripple")
+                    let cardButtonLabel = document.createElement("span");
+                    cardButtonLabel.setAttribute("class", "mdc-button__label")
+                    cardButtonLabel.innerText = "Find it on the map"
+
+                    // Append the button's contents to the button
+                    // Then, append the button to the card
+                    cardButton.appendChild(cardButtonRipple)
+                    cardButton.appendChild(cardButtonLabel)
+                    card.appendChild(cardButton)
+
+                    cardButton.addEventListener("click", (event) => {
+                      document.querySelector("#div4").scrollTop = 0;
+
+                      // Display the mark on Google maps
+                      infowindow.open({
+                        anchor: marker,
+                        map,
+                        shouldFocus: false,
+                      });
+                    })
+
+                    // Append the card to the filtered result 'list'
+                    // below the filter
+                    document.querySelector(".movie-container-filter-results").append(card)
 
                   } // Rating and movie location filters
                   else if (dayCheckBoxes.length == 0 && ratingCheckBoxes.length != 0 && movieLocationOption == record.park) {
@@ -508,6 +846,71 @@
 
                         // Store the marker
                         markers.push(marker)
+
+                        // Create card for each filtered result
+                        let card = document.createElement("div")
+                        card.setAttribute("class", "mdc-card mdc-card--outlined movie-filtered-card")
+
+                        // Create the card's contents
+                        let cardContent = document.createElement("div")
+                        cardContent.setAttribute("class", "mdc-card__content");
+
+                        let cardMovie = document.createElement("h2");
+                        cardMovie.setAttribute("class", "movie-title"
+                        )
+                        cardMovie.innerHTML = record.title;
+
+                        let cardRating = document.createElement("h6");
+                        cardRating.setAttribute("class", "movie-rating"
+                        )
+                        cardRating.innerHTML = "<i>" + record.rating + "</i>";
+
+                        let cardTime = document.createElement("h7");
+                        cardTime.setAttribute("class", "movie-time")
+                        cardTime.innerHTML = "<b><u>When:</u></b> " + record.date.substring(0, 10)
+
+                        let cardLocation = document.createElement("h7")
+                        cardLocation.setAttribute("class", "movie-location")
+                        cardLocation.innerHTML = "<br><b><u>Place:</u></b> " + record.park + "<br><b><u>Address:</u></b> " + record.park_address + "<br><b><u>Phone Number:</u></b> " + record.park_phone + "<br>";
+
+                        // Append the card contents to the card itself
+                        cardContent.appendChild(cardMovie)
+                        cardContent.appendChild(cardRating)
+                        cardContent.appendChild(cardTime)
+                        cardContent.appendChild(cardLocation)
+
+                        card.appendChild(cardContent)
+
+                        // Create a button that shows where the movie is taking place
+                        let cardButton = document.createElement("button");
+                        cardButton.setAttribute("class", "mdc-button mdc-button--outlined card-location-button")
+
+                        let cardButtonRipple = document.createElement("span");
+                        cardButtonRipple.setAttribute("class", "mdc-button__ripple")
+                        let cardButtonLabel = document.createElement("span");
+                        cardButtonLabel.setAttribute("class", "mdc-button__label")
+                        cardButtonLabel.innerText = "Find it on the map"
+
+                        // Append the button's contents to the button
+                        // Then, append the button to the card
+                        cardButton.appendChild(cardButtonRipple)
+                        cardButton.appendChild(cardButtonLabel)
+                        card.appendChild(cardButton)
+
+                        cardButton.addEventListener("click", (event) => {
+                          document.querySelector("#div4").scrollTop = 0;
+
+                          // Display the mark on Google maps
+                          infowindow.open({
+                            anchor: marker,
+                            map,
+                            shouldFocus: false,
+                          });
+                        })
+
+                        // Append the card to the filtered result 'list'
+                        // below the filter
+                        document.querySelector(".movie-container-filter-results").append(card)
                       }
                     })
                   } // Day and movie location filters
@@ -546,6 +949,71 @@
 
                         // Store the marker
                         markers.push(marker)
+
+                        // Create card for each filtered result
+                        let card = document.createElement("div")
+                        card.setAttribute("class", "mdc-card mdc-card--outlined movie-filtered-card")
+
+                        // Create the card's contents
+                        let cardContent = document.createElement("div")
+                        cardContent.setAttribute("class", "mdc-card__content");
+
+                        let cardMovie = document.createElement("h2");
+                        cardMovie.setAttribute("class", "movie-title"
+                        )
+                        cardMovie.innerHTML = record.title;
+
+                        let cardRating = document.createElement("h6");
+                        cardRating.setAttribute("class", "movie-rating"
+                        )
+                        cardRating.innerHTML = "<i>" + record.rating + "</i>";
+
+                        let cardTime = document.createElement("h7");
+                        cardTime.setAttribute("class", "movie-time")
+                        cardTime.innerHTML = "<b><u>When:</u></b> " + record.date.substring(0, 10)
+
+                        let cardLocation = document.createElement("h7")
+                        cardLocation.setAttribute("class", "movie-location")
+                        cardLocation.innerHTML = "<br><b><u>Place:</u></b> " + record.park + "<br><b><u>Address:</u></b> " + record.park_address + "<br><b><u>Phone Number:</u></b> " + record.park_phone + "<br>";
+
+                        // Append the card contents to the card itself
+                        cardContent.appendChild(cardMovie)
+                        cardContent.appendChild(cardRating)
+                        cardContent.appendChild(cardTime)
+                        cardContent.appendChild(cardLocation)
+
+                        card.appendChild(cardContent)
+
+                        // Create a button that shows where the movie is taking place
+                        let cardButton = document.createElement("button");
+                        cardButton.setAttribute("class", "mdc-button mdc-button--outlined card-location-button")
+
+                        let cardButtonRipple = document.createElement("span");
+                        cardButtonRipple.setAttribute("class", "mdc-button__ripple")
+                        let cardButtonLabel = document.createElement("span");
+                        cardButtonLabel.setAttribute("class", "mdc-button__label")
+                        cardButtonLabel.innerText = "Find it on the map"
+
+                        // Append the button's contents to the button
+                        // Then, append the button to the card
+                        cardButton.appendChild(cardButtonRipple)
+                        cardButton.appendChild(cardButtonLabel)
+                        card.appendChild(cardButton)
+
+                        cardButton.addEventListener("click", (event) => {
+                          document.querySelector("#div4").scrollTop = 0;
+
+                          // Display the mark on Google maps
+                          infowindow.open({
+                            anchor: marker,
+                            map,
+                            shouldFocus: false,
+                          });
+                        })
+
+                        // Append the card to the filtered result 'list'
+                        // below the filter
+                        document.querySelector(".movie-container-filter-results").append(card)
                       }
                     })
 
@@ -585,6 +1053,71 @@
 
                           // Store the marker
                           markers.push(marker)
+
+                          // Create card for each filtered result
+                          let card = document.createElement("div")
+                          card.setAttribute("class", "mdc-card mdc-card--outlined movie-filtered-card")
+
+                          // Create the card's contents
+                          let cardContent = document.createElement("div")
+                          cardContent.setAttribute("class", "mdc-card__content");
+
+                          let cardMovie = document.createElement("h2");
+                          cardMovie.setAttribute("class", "movie-title"
+                          )
+                          cardMovie.innerHTML = record.title;
+
+                          let cardRating = document.createElement("h6");
+                          cardRating.setAttribute("class", "movie-rating"
+                          )
+                          cardRating.innerHTML = "<i>" + record.rating + "</i>";
+
+                          let cardTime = document.createElement("h7");
+                          cardTime.setAttribute("class", "movie-time")
+                          cardTime.innerHTML = "<b><u>When:</u></b> " + record.date.substring(0, 10)
+
+                          let cardLocation = document.createElement("h7")
+                          cardLocation.setAttribute("class", "movie-location")
+                          cardLocation.innerHTML = "<br><b><u>Place:</u></b> " + record.park + "<br><b><u>Address:</u></b> " + record.park_address + "<br><b><u>Phone Number:</u></b> " + record.park_phone + "<br>";
+
+                          // Append the card contents to the card itself
+                          cardContent.appendChild(cardMovie)
+                          cardContent.appendChild(cardRating)
+                          cardContent.appendChild(cardTime)
+                          cardContent.appendChild(cardLocation)
+
+                          card.appendChild(cardContent)
+
+                          // Create a button that shows where the movie is taking place
+                          let cardButton = document.createElement("button");
+                          cardButton.setAttribute("class", "mdc-button mdc-button--outlined card-location-button")
+
+                          let cardButtonRipple = document.createElement("span");
+                          cardButtonRipple.setAttribute("class", "mdc-button__ripple")
+                          let cardButtonLabel = document.createElement("span");
+                          cardButtonLabel.setAttribute("class", "mdc-button__label")
+                          cardButtonLabel.innerText = "Find it on the map"
+
+                          // Append the button's contents to the button
+                          // Then, append the button to the card
+                          cardButton.appendChild(cardButtonRipple)
+                          cardButton.appendChild(cardButtonLabel)
+                          card.appendChild(cardButton)
+
+                          cardButton.addEventListener("click", (event) => {
+                            document.querySelector("#div4").scrollTop = 0;
+
+                            // Display the mark on Google maps
+                            infowindow.open({
+                              anchor: marker,
+                              map,
+                              shouldFocus: false,
+                            });
+                          })
+
+                          // Append the card to the filtered result 'list'
+                          // below the filter
+                          document.querySelector(".movie-container-filter-results").append(card)
                         }
                       })
                     })
@@ -613,9 +1146,9 @@
           <h1 style="font-family: 'Courier New', Courier, monospace; font-weight:bold;">USER REVIEW</h1>
         </center>
         <button class="mdc-icon-button material-icons back-button">
-            <div class="mdc-icon-button__ripple"></div>
-            arrow_back
-          </button>
+          <div class="mdc-icon-button__ripple"></div>
+          arrow_back
+        </button>
         <div class="user-review-content">
           <u>
             <h1 class="user-name"></h1>
