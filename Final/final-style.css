@@ -151,6 +151,7 @@ body {
 .back-button {
   position: fixed;
   bottom:55px;
+  background-color:#123456;
 }
 
 /* Screen 4: Movies Playing */

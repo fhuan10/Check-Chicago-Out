@@ -42,7 +42,8 @@ fetch(API_KEY)
       cardAction.setAttribute("class", "mdc-card__actions")
       
       let cardButton = document.createElement("button")
-      cardButton.setAttribute("class", "mdc-button mdc-card__action mdc-card__action--button")
+      cardButton.setAttribute("class", "mdc-button mdc-card__action mdc-card__action--button mdc-button--raised")
+      cardButton.setAttribute("style", "background-color:#123456;")
 
       let cardButtonRipple = document.createElement("div")
       cardButtonRipple.setAttribute("class", "mdc-button__ripple")
