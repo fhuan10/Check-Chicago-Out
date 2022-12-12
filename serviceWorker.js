@@ -5,6 +5,7 @@ const assets = [
   "/style.css",
   "/app.js",
   "Final/index.html",
+  "Final/camera.js",
   "Final/chicagoArticles.js",
   "Final/database.js",
   "Final/displayFilter.js",

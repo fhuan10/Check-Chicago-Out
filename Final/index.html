@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>
-    Check Chicago Out 
+    Check Chicago Out
   </title>
 
   <link href="final-style.css" rel="stylesheet" type="text/css" />
@@ -33,7 +33,8 @@
     <div class="mdc-top-app-bar__row">
       <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start;">
         <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
-        <span class="mdc-top-app-bar__title" style="font-family: Garamond, Monaco, monospace; font-size:28px;">Check Chicago Out</span>
+        <span class="mdc-top-app-bar__title" style="font-family: Garamond, Monaco, monospace; font-size:28px;">Check
+          Chicago Out</span>
       </section>
     </div>
   </header>
@@ -61,6 +62,11 @@
         <a class="mdc-list-item nav-tab" href="" data-screen="div4">
           <span class="mdc-list-item__ripple"></span>
           <span class="mdc-list-item__text" data-screen="div4">Movies Playing</span>
+        </a>
+
+        <a class="mdc-list-item nav-tab" href="" data-screen="div6">
+          <span class="mdc-list-item__ripple"></span>
+          <span class="mdc-list-item__text" data-screen="div6">Take a Picture</span>
         </a>
 
       </div>
@@ -189,7 +195,8 @@
       </div>
 
       <center>
-        <button class="mdc-button mdc-button--raised submit-button" style="width:100%; height:40px; background-color:#123456;">
+        <button class="mdc-button mdc-button--raised submit-button"
+          style="width:100%; height:40px; background-color:#123456;">
           <span class="mdc-button__label submit-button">FILTER</span>
         </button>
       </center>
@@ -204,8 +211,6 @@
       </center>
       <!--  TODO: Display the results   -->
       <div class="movie-container-filter-results"></div>
-
-      <!--  API call: https://data.cityofchicago.org/Events/Chicago-Park-District-Movies-in-the-Parks-2019/7piw-z6r6   -->
 
       <script>
         let map;
@@ -1161,12 +1166,38 @@
       </article>
 
     </main>
+
+    <main id="div6" class="screen main-content" style="display:none;">
+      <center>
+        <h1 style="font-family: 'Courier New', Courier, monospace; background-color:lightblue;"><b>IF YOU ARE AT CHICAGO, TAKE A PICTURE!</b>
+        </h1>
+        <div class="camera">
+          <video id="video">Video stream not available.</video>
+          <br>
+          <br>
+          <button id="startbutton" class="mdc-button mdc-button--raised"
+            style="width:100%; height:40px; background-color:#123456;">
+            <span class="mdc-button__label startbutton">TAKE A PICTURE</span>
+          </button>
+        </div>
+
+        <br>
+
+        <canvas id="canvas"> </canvas>
+        <div class="output">
+          <img id="photo" alt="The screen capture will appear in this box." />
+        </div>
+      </center>
+    </main>
   </div>
+
+
 
   <script src="final.js"></script>
   <script src="chicagoArticles.js"></script>
   <script src="displayFilter.js"></script>
   <script src="database.js"></script>
+  <script src="camera.js"></script>
 </body>
 
 </html>

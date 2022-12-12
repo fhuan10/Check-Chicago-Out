@@ -20,6 +20,8 @@ Screens:
   - Used the API from City of Chicago website (https://data.cityofchicago.org/Events/Chicago-Park-District-Movies-in-the-Parks-2019/7piw-z6r6)
   - Used a Google Map to display all the mark locations where the movies are playing at
   - Filtered day, movie rating, and movie locations
+- Take a Picture
+  - Take a picture using the camera API
 
 
 Comments about the Website (from my friend):
@@ -28,4 +30,11 @@ Comments about the Website (from my friend):
 - Liked how the site is accessible on web and mobile
 - Have fun creating reviews by herself
 - "Consider trying to add the latest news and movies playing on your website? Maybe there's a way to bring in live data and have the website update on its on regularly" - quoted by my friend
+- Wish the movie locations dropdown options are in ascending order (in the Movies Playing screen)
+
+Updates:
+- I modified the movie locations dropdown options where all of them appear in ascending order.
+
+
+
 

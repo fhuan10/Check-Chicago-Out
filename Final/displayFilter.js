@@ -1,3 +1,4 @@
+// For 'Movies Playing' page
 let dayArr = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 let ratingArr = ["NR", "PG", "PG-13", "G"]
 
@@ -46,6 +47,7 @@ function createDropDown() {
   // Have to fetch API
   let movieURL = "https://data.cityofchicago.org/resource/7piw-z6r6.json"
 
+  var movieLocations = [];
   // Create an option for none
   var newOption = document.createElement("option")
   newOption.setAttribute("value", "")
@@ -56,12 +58,19 @@ function createDropDown() {
     .then((data) => {
       data.forEach((record) => {
         if (record.title != "My Favorite Wife") {
-          var newOption = document.createElement("option")
-          newOption.setAttribute("value", record.park)
-          newOption.innerText = record.park
-
-          dropDown.appendChild(newOption)
+          movieLocations.push(record.park);
         }
+      })
+
+      movieLocations.sort();  // sort the location in ascending order
+
+      // Append these locations as dropdown options (to choose a movie location)
+      movieLocations.forEach(location => {
+        var newOption = document.createElement("option")
+        newOption.setAttribute("value", location)
+        newOption.innerText = location
+
+        dropDown.appendChild(newOption)
       })
     })
 

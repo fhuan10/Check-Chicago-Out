@@ -11,10 +11,6 @@
       "type": "image/jpeg", "sizes": "1280x700"
     },
     {
-      "src": "images/theBean.jpg",
-      "type": "image/jpg", "sizes": "3000x1647"
-    },
-    {
       "src": "images/chicago-tower.png",
       "type": "image/png", "sizes": "200x200"
     }
