@@ -14,10 +14,7 @@ const assets = [
   "Final/map.js",
   "Final/images/chicagoView.jpeg",
   "Final/images/theBean.jpg",
-  "Final/images/chicago-tower.png",
-  "NavigationDrawer/drawer.js",
-  "NavigationDrawer/index.html",
-  "NavigationDrawer/style2.css"
+  "Final/images/chicago-tower.png"
 ];
 
 self.addEventListener("install", installEvent => {
